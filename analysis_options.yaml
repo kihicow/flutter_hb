@@ -1,0 +1,16 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    invalid_annotation_target: ignore
+    
+  exclude: 
+    - '**/*.freezed.dart'
+    - '**/*.g.dart'
+    - 'lib/generated'
+    - 'lib/l10n'
+    - 'lib/firebase_options.dart'
+
+linter:
+  rules:
+    always_use_package_imports: false
