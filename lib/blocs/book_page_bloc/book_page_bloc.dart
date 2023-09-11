@@ -40,6 +40,9 @@ class BookPageBloc extends Bloc<BookPageEvent, BookPageState> {
   final GlobalKey<FormState> phoneFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
 
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
   final Pattern _emailPattern =
       r"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
 
@@ -124,8 +127,8 @@ class BookPageBloc extends Bloc<BookPageEvent, BookPageState> {
 
     emit(state.copyWith(tourists: updatedTourists));
 
-    final bool isPhoneValid = phoneFormKey.currentState!.validate();
-    final bool isEmailValid = emailFormKey.currentState!.validate();
+    final bool isPhoneValid = phoneValid(state.phone);
+    final bool isEmailValid = emailValid(state.email);
 
     final List<bool> touristValidations = [];
     for (final element in state.tourists) {

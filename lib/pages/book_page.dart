@@ -434,6 +434,7 @@ class _CustomerInfo extends StatelessWidget {
                   _read(context).phoneValid(_read(context).state.phone);
                 },
                 child: TextFormField(
+                  controller: _read(context).phoneController,
                   textInputAction: TextInputAction.next,
                   style: AppStyle.textFieldTextStyle,
                   keyboardType: TextInputType.phone,
@@ -500,6 +501,7 @@ class _CustomerInfo extends StatelessWidget {
                 _read(context).emailValid(_read(context).state.email);
               },
               child: TextFormField(
+                controller: _read(context).emailController,
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.emailAddress,
                 style: AppStyle.textFieldTextStyle,
