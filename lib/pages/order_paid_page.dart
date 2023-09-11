@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hb/app_style.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../app_style.dart';
 import '../blocs/order_paid_page_bloc/order_paid_page_bloc.dart';
 import '../widgets/bottom_button.dart';
 

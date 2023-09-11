@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_hb/models/hotel_page_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../models/hotel_page_model.dart';
 import '../../models/rest_client.dart';
 import '../../pages/room_page.dart';
 
@@ -32,10 +32,12 @@ class HotelPageBloc extends Bloc<HotelPageEvent, HotelPageState> {
     final client = RestClient(Modular.get<Dio>());
     final HotelPageModel hotel = await client.getHotel();
 
-    emit(state.copyWith(
-      hotel: hotel,
-      loading: false,
-    ));
+    emit(
+      state.copyWith(
+        hotel: hotel,
+        loading: false,
+      ),
+    );
   }
 
   FutureOr<void> _imageScrolled(

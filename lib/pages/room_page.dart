@@ -74,8 +74,12 @@ class _Body extends StatelessWidget {
             ImageCarouselWidget(
               imageUrls: room.imageUrls,
               onPageChanged: (index) {
-                _read(context).add(RoomPageEvent.imageScrolled(
-                    imageIndex: index, roomId: room.id));
+                _read(context).add(
+                  RoomPageEvent.imageScrolled(
+                    imageIndex: index,
+                    roomId: room.id,
+                  ),
+                );
               },
               imageIndex: _watch(context).state.roomPageList[index].imageIndex,
             ),
@@ -92,31 +96,37 @@ class _Body extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   const _ShowMorePane(),
                   const SizedBox(height: 16.0),
-                  Text.rich(TextSpan(children: [
+                  Text.rich(
                     TextSpan(
-                      text: '${toCurrencyString(
-                        room.price.toString(),
-                        mantissaLength: 0,
-                        thousandSeparator: ThousandSeparator.Space,
-                      )} ₽',
-                      style: AppStyle.priceTitleTextStyle,
+                      children: [
+                        TextSpan(
+                          text: '${toCurrencyString(
+                            room.price.toString(),
+                            mantissaLength: 0,
+                            thousandSeparator: ThousandSeparator.Space,
+                          )} ₽',
+                          style: AppStyle.priceTitleTextStyle,
+                        ),
+                        const WidgetSpan(
+                          child: SizedBox(
+                            width: 8.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: room.priceDescription,
+                          style: AppStyle.subtitleTextStyle,
+                        ),
+                      ],
                     ),
-                    const WidgetSpan(
-                        child: SizedBox(
-                      width: 8.0,
-                    )),
-                    TextSpan(
-                      text: room.priceDescription,
-                      style: AppStyle.subtitleTextStyle,
-                    ),
-                  ])),
+                  ),
                   const SizedBox(height: 16.0),
                   BottomButton(
-                      onPressed: () {
-                        _read(context)
-                            .add(const RoomPageEvent.chooseRoomButtonPressed());
-                      },
-                      title: 'Выбрать номер'),
+                    onPressed: () {
+                      _read(context)
+                          .add(const RoomPageEvent.chooseRoomButtonPressed());
+                    },
+                    title: 'Выбрать номер',
+                  ),
                 ],
               ),
             ),

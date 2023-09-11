@@ -7,8 +7,6 @@ part 'book_page_model.g.dart';
 
 @freezed
 class BookPageModel with _$BookPageModel {
-  const BookPageModel._();
-
   const factory BookPageModel({
     required int id,
     required String hotelName,
@@ -26,6 +24,8 @@ class BookPageModel with _$BookPageModel {
     required int fuelCharge,
     required int serviceCharge,
   }) = _BookPageModel;
+
+  const BookPageModel._();
 
   int get finalPrice => tourPrice + fuelCharge + serviceCharge;
 

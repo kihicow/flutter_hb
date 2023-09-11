@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hb/pages/order_paid_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,6 +10,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../models/book_page_model.dart';
 import '../../models/rest_client.dart';
 import '../../models/tourist_view_model.dart';
+import '../../pages/order_paid_page.dart';
 
 part 'book_page_bloc.freezed.dart';
 part 'book_page_event.dart';
@@ -69,10 +69,12 @@ class BookPageBloc extends Bloc<BookPageEvent, BookPageState> {
     final client = RestClient(Modular.get<Dio>());
     final BookPageModel book = await client.getBook();
 
-    emit(state.copyWith(
-      bookPageModel: book,
-      loading: false,
-    ));
+    emit(
+      state.copyWith(
+        bookPageModel: book,
+        loading: false,
+      ),
+    );
   }
 
   FutureOr<void> _backButtonPressed(

@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import '../app_style.dart';
 
 class ImageCarouselWidget extends StatelessWidget {
-  const ImageCarouselWidget(
-      {super.key,
-      required this.imageUrls,
-      required this.onPageChanged,
-      required this.imageIndex});
+  const ImageCarouselWidget({
+    super.key,
+    required this.imageUrls,
+    required this.onPageChanged,
+    required this.imageIndex,
+  });
 
   final List<String> imageUrls;
   final ValueChanged<int> onPageChanged;
@@ -35,8 +36,10 @@ class ImageCarouselWidget extends StatelessWidget {
 }
 
 class _CarouselSlider extends StatelessWidget {
-  const _CarouselSlider(
-      {required this.imagesUrls, required this.onPageChanged});
+  const _CarouselSlider({
+    required this.imagesUrls,
+    required this.onPageChanged,
+  });
 
   final List<String> imagesUrls;
   final ValueChanged<int> onPageChanged;

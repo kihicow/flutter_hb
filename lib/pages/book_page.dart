@@ -1,15 +1,15 @@
 import 'package:expansion_widget/expansion_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hb/app_style.dart';
-import 'package:flutter_hb/widgets/module_widget.dart';
-import 'package:flutter_hb/widgets/rating_pane.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
+import '../app_style.dart';
 import '../blocs/book_page_bloc/book_page_bloc.dart';
 import '../models/tourist_view_model.dart';
 import '../widgets/bottom_button.dart';
+import '../widgets/module_widget.dart';
+import '../widgets/rating_pane.dart';
 
 class BookPage extends StatelessWidget {
   const BookPage({super.key});
@@ -115,34 +115,37 @@ class _AddTouristModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ModuleWidget(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            'Добавить туриста',
-            style: AppStyle.titleTextStyle,
-          ),
-          InkWell(
-            onTap: () {
-              _read(context).add(const BookPageEvent.addTouristButtonPressed());
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: AppStyle.addTouristPaneColor,
-              ),
-              height: 32,
-              width: 32,
-              child: const Icon(
-                Icons.add,
-                color: AppStyle.addTouristIconColor,
+    return ModuleWidget(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Добавить туриста',
+              style: AppStyle.titleTextStyle,
+            ),
+            InkWell(
+              onTap: () {
+                _read(context)
+                    .add(const BookPageEvent.addTouristButtonPressed());
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6.0),
+                  color: AppStyle.addTouristPaneColor,
+                ),
+                height: 32,
+                width: 32,
+                child: const Icon(
+                  Icons.add,
+                  color: AppStyle.addTouristIconColor,
+                ),
               ),
             ),
-          )
-        ],
-      )
-    ]);
+          ],
+        ),
+      ],
+    );
   }
 }
 
@@ -152,46 +155,47 @@ class _PriceModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ModuleWidget(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        children: [
-          Table(
-            children: [
-              _priceTableRow(
-                title: 'Тур',
-                value: '${toCurrencyString(
-                  _read(context).state.bookPageModel.tourPrice.toString(),
-                  mantissaLength: 0,
-                  thousandSeparator: ThousandSeparator.Space,
-                )} ₽',
-              ),
-              _priceTableRow(
-                title: 'Топливный сбор',
-                value: '${toCurrencyString(
-                  _read(context).state.bookPageModel.fuelCharge.toString(),
-                  mantissaLength: 0,
-                  thousandSeparator: ThousandSeparator.Space,
-                )} ₽',
-              ),
-              _priceTableRow(
-                title: 'Сервисный сбор',
-                value: '${toCurrencyString(
-                  _read(context).state.bookPageModel.serviceCharge.toString(),
-                  mantissaLength: 0,
-                  thousandSeparator: ThousandSeparator.Space,
-                )} ₽',
-              ),
-              _priceTableRow(
-                title: 'К оплате',
-                value: '${toCurrencyString(
-                  _read(context).state.bookPageModel.finalPrice.toString(),
-                  mantissaLength: 0,
-                  thousandSeparator: ThousandSeparator.Space,
-                )} ₽',
-                color: AppStyle.addressButtonColor,
-              ),
-            ],
-          )
-        ]);
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      children: [
+        Table(
+          children: [
+            _priceTableRow(
+              title: 'Тур',
+              value: '${toCurrencyString(
+                _read(context).state.bookPageModel.tourPrice.toString(),
+                mantissaLength: 0,
+                thousandSeparator: ThousandSeparator.Space,
+              )} ₽',
+            ),
+            _priceTableRow(
+              title: 'Топливный сбор',
+              value: '${toCurrencyString(
+                _read(context).state.bookPageModel.fuelCharge.toString(),
+                mantissaLength: 0,
+                thousandSeparator: ThousandSeparator.Space,
+              )} ₽',
+            ),
+            _priceTableRow(
+              title: 'Сервисный сбор',
+              value: '${toCurrencyString(
+                _read(context).state.bookPageModel.serviceCharge.toString(),
+                mantissaLength: 0,
+                thousandSeparator: ThousandSeparator.Space,
+              )} ₽',
+            ),
+            _priceTableRow(
+              title: 'К оплате',
+              value: '${toCurrencyString(
+                _read(context).state.bookPageModel.finalPrice.toString(),
+                mantissaLength: 0,
+                thousandSeparator: ThousandSeparator.Space,
+              )} ₽',
+              color: AppStyle.addressButtonColor,
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
 
@@ -424,41 +428,41 @@ class _CustomerInfo extends StatelessWidget {
           const SizedBox(height: 16.0),
           Stack(
             children: [
-          TextFormField(
-            textInputAction: TextInputAction.next,
-            style: AppStyle.textFieldTextStyle,
-            decoration: AppStyle.textFieldDecoration.copyWith(
-              prefixText: '+7',
+              TextFormField(
+                textInputAction: TextInputAction.next,
+                style: AppStyle.textFieldTextStyle,
+                decoration: AppStyle.textFieldDecoration.copyWith(
+                  prefixText: '+7',
                   prefixStyle: AppStyle.textFieldTextStyle,
-              labelText: 'Номер телефона',
-              hintText: '(***) ***-**-**',
+                  labelText: 'Номер телефона',
+                  hintText: '(***) ***-**-**',
                   hintStyle: AppStyle.textFieldTextStyle
                       .copyWith(color: AppStyle.subtitleColor),
-              fillColor: _watch(context).state.phoneError
-                  ? AppStyle.errorColor
-                  : AppStyle.textFieldDecoration.fillColor,
-            ),
+                  fillColor: _watch(context).state.phoneError
+                      ? AppStyle.errorColor
+                      : AppStyle.textFieldDecoration.fillColor,
+                ),
                 onChanged: (value) {
                   _read(context)
                       .add(BookPageEvent.customerPhoneUpdated(text: value));
                 },
-            inputFormatters: [
-              PhoneInputFormatter(defaultCountryCode: 'ru'),
-            ],
-            autovalidateMode: _watch(context).state.phoneError
-                ? AutovalidateMode.onUserInteraction
-                : null,
-            onEditingComplete: () {
-              FocusScope.of(context).nextFocus();
-            },
-            validator: (value) {
-              if (_read(context).phoneValid(value)) {
-                return null;
-              }
-              return '';
-            },
-          ),
-          Padding(
+                inputFormatters: [
+                  PhoneInputFormatter(defaultCountryCode: 'ru'),
+                ],
+                autovalidateMode: _watch(context).state.phoneError
+                    ? AutovalidateMode.onUserInteraction
+                    : null,
+                onEditingComplete: () {
+                  FocusScope.of(context).nextFocus();
+                },
+                validator: (value) {
+                  if (_read(context).phoneValid(value)) {
+                    return null;
+                  }
+                  return '';
+                },
+              ),
+              Padding(
                 padding: const EdgeInsets.only(top: 22.0, left: 16.5),
                 child: Text.rich(
                   TextSpan(
@@ -511,7 +515,7 @@ class _CustomerInfo extends StatelessWidget {
           const Text(
             'Эти данные никому не передаются. После оплаты мы вышлем чек на указанные вами номер и почту.',
             style: AppStyle.smallTextStyle,
-          )
+          ),
         ],
       ),
     );
@@ -611,7 +615,7 @@ class _Table extends StatelessWidget {
               value: _read(context).state.bookPageModel.nutrition,
             ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -640,7 +644,7 @@ class _HotelDescription extends StatelessWidget {
             _read(context).state.bookPageModel.hotelAddress,
             style: AppStyle.addressButtonTextStyle,
           ),
-        )
+        ),
       ],
     );
   }

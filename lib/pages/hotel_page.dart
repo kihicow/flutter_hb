@@ -134,7 +134,8 @@ class _DescriptionModule extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         PeculiaritiesList(
-            _read(context).state.hotel.aboutTheHotelPeculiarities),
+          _read(context).state.hotel.aboutTheHotelPeculiarities,
+        ),
         const SizedBox(height: 8.0),
         Text(
           _read(context).state.hotel.aboutTheHotelDescription,
@@ -263,9 +264,10 @@ class _PriceView extends StatelessWidget {
             style: AppStyle.priceTitleTextStyle,
           ),
           const WidgetSpan(
-              child: SizedBox(
-            width: 8.0,
-          )),
+            child: SizedBox(
+              width: 8.0,
+            ),
+          ),
           TextSpan(
             text: _read(context).state.hotel.priceForIt,
             style: AppStyle.subtitleTextStyle,

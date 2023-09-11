@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_hb/blocs/book_page_bloc/book_page_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'blocs/book_page_bloc/book_page_bloc.dart';
 import 'blocs/hotel_page_bloc/hotel_page_bloc.dart';
 import 'blocs/order_paid_page_bloc/order_paid_page_bloc.dart';
 import 'blocs/room_page_bloc/room_page_bloc.dart';

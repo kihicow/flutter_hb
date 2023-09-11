@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_hb/models/hotel_page_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 import 'book_page_model.dart';
+import 'hotel_page_model.dart';
 import 'room_view_model.dart';
 
 part 'rest_client.g.dart';

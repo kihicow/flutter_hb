@@ -3600,6 +3600,8 @@ mixin _$BookPageState {
   bool get loading => throw _privateConstructorUsedError;
   BookPageModel get bookPageModel => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
+  String get phoneInvisible => throw _privateConstructorUsedError;
+  String get phoneMask => throw _privateConstructorUsedError;
   bool get phoneError => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   bool get emailError => throw _privateConstructorUsedError;
@@ -3620,6 +3622,8 @@ abstract class $BookPageStateCopyWith<$Res> {
       {bool loading,
       BookPageModel bookPageModel,
       String phone,
+      String phoneInvisible,
+      String phoneMask,
       bool phoneError,
       String email,
       bool emailError,
@@ -3644,6 +3648,8 @@ class _$BookPageStateCopyWithImpl<$Res, $Val extends BookPageState>
     Object? loading = null,
     Object? bookPageModel = null,
     Object? phone = null,
+    Object? phoneInvisible = null,
+    Object? phoneMask = null,
     Object? phoneError = null,
     Object? email = null,
     Object? emailError = null,
@@ -3661,6 +3667,14 @@ class _$BookPageStateCopyWithImpl<$Res, $Val extends BookPageState>
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneInvisible: null == phoneInvisible
+          ? _value.phoneInvisible
+          : phoneInvisible // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneMask: null == phoneMask
+          ? _value.phoneMask
+          : phoneMask // ignore: cast_nullable_to_non_nullable
               as String,
       phoneError: null == phoneError
           ? _value.phoneError
@@ -3702,6 +3716,8 @@ abstract class _$$_BookPageStateCopyWith<$Res>
       {bool loading,
       BookPageModel bookPageModel,
       String phone,
+      String phoneInvisible,
+      String phoneMask,
       bool phoneError,
       String email,
       bool emailError,
@@ -3725,6 +3741,8 @@ class __$$_BookPageStateCopyWithImpl<$Res>
     Object? loading = null,
     Object? bookPageModel = null,
     Object? phone = null,
+    Object? phoneInvisible = null,
+    Object? phoneMask = null,
     Object? phoneError = null,
     Object? email = null,
     Object? emailError = null,
@@ -3742,6 +3760,14 @@ class __$$_BookPageStateCopyWithImpl<$Res>
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneInvisible: null == phoneInvisible
+          ? _value.phoneInvisible
+          : phoneInvisible // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneMask: null == phoneMask
+          ? _value.phoneMask
+          : phoneMask // ignore: cast_nullable_to_non_nullable
               as String,
       phoneError: null == phoneError
           ? _value.phoneError
@@ -3770,6 +3796,8 @@ class _$_BookPageState implements _BookPageState {
       {required this.loading,
       required this.bookPageModel,
       required this.phone,
+      required this.phoneInvisible,
+      required this.phoneMask,
       required this.phoneError,
       required this.email,
       required this.emailError,
@@ -3782,6 +3810,10 @@ class _$_BookPageState implements _BookPageState {
   final BookPageModel bookPageModel;
   @override
   final String phone;
+  @override
+  final String phoneInvisible;
+  @override
+  final String phoneMask;
   @override
   final bool phoneError;
   @override
@@ -3798,7 +3830,7 @@ class _$_BookPageState implements _BookPageState {
 
   @override
   String toString() {
-    return 'BookPageState(loading: $loading, bookPageModel: $bookPageModel, phone: $phone, phoneError: $phoneError, email: $email, emailError: $emailError, tourists: $tourists)';
+    return 'BookPageState(loading: $loading, bookPageModel: $bookPageModel, phone: $phone, phoneInvisible: $phoneInvisible, phoneMask: $phoneMask, phoneError: $phoneError, email: $email, emailError: $emailError, tourists: $tourists)';
   }
 
   @override
@@ -3810,6 +3842,10 @@ class _$_BookPageState implements _BookPageState {
             (identical(other.bookPageModel, bookPageModel) ||
                 other.bookPageModel == bookPageModel) &&
             (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.phoneInvisible, phoneInvisible) ||
+                other.phoneInvisible == phoneInvisible) &&
+            (identical(other.phoneMask, phoneMask) ||
+                other.phoneMask == phoneMask) &&
             (identical(other.phoneError, phoneError) ||
                 other.phoneError == phoneError) &&
             (identical(other.email, email) || other.email == email) &&
@@ -3824,6 +3860,8 @@ class _$_BookPageState implements _BookPageState {
       loading,
       bookPageModel,
       phone,
+      phoneInvisible,
+      phoneMask,
       phoneError,
       email,
       emailError,
@@ -3841,6 +3879,8 @@ abstract class _BookPageState implements BookPageState {
       {required final bool loading,
       required final BookPageModel bookPageModel,
       required final String phone,
+      required final String phoneInvisible,
+      required final String phoneMask,
       required final bool phoneError,
       required final String email,
       required final bool emailError,
@@ -3852,6 +3892,10 @@ abstract class _BookPageState implements BookPageState {
   BookPageModel get bookPageModel;
   @override
   String get phone;
+  @override
+  String get phoneInvisible;
+  @override
+  String get phoneMask;
   @override
   bool get phoneError;
   @override

@@ -5,8 +5,6 @@ part 'tourist_view_model.freezed.dart';
 
 @freezed
 class TouristViewModel with _$TouristViewModel {
-  const TouristViewModel._();
-
   const factory TouristViewModel({
     required GlobalKey<FormState> formKey,
     required bool isExpanded,
@@ -18,6 +16,8 @@ class TouristViewModel with _$TouristViewModel {
     required String? passportNumber,
     required String? passportDate,
   }) = _TouristViewModel;
+
+  const TouristViewModel._();
 
   factory TouristViewModel.initial() => TouristViewModel(
         formKey: GlobalKey<FormState>(),

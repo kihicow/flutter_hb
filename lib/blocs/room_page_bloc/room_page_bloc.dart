@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_hb/pages/book_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../models/rest_client.dart';
 import '../../models/room_view_model.dart';
+import '../../pages/book_page.dart';
 
 part 'room_page_bloc.freezed.dart';
 part 'room_page_event.dart';
@@ -30,10 +30,12 @@ class RoomPageBloc extends Bloc<RoomPageEvent, RoomPageState> {
     final RestClient client = RestClient(Modular.get<Dio>());
     final Map<String, List<RoomViewModel>> rooms = await client.getRooms();
 
-    emit(state.copyWith(
-      roomPageList: rooms['rooms'] ?? [],
-      loading: false,
-    ));
+    emit(
+      state.copyWith(
+        roomPageList: rooms['rooms'] ?? [],
+        loading: false,
+      ),
+    );
   }
 
   FutureOr<void> _imageScrolled(

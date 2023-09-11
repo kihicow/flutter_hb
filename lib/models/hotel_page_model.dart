@@ -4,10 +4,11 @@ part 'hotel_page_model.freezed.dart';
 part 'hotel_page_model.g.dart';
 
 String _readHotelDescription(Map json, String key) =>
-    json['about_the_hotel']['description'];
+    (json['about_the_hotel'] as Map<String, dynamic>)['description'] as String;
 
 List<dynamic> _readHotelPeculiarities(Map json, String key) =>
-    json['about_the_hotel']['peculiarities'];
+    (json['about_the_hotel'] as Map<String, dynamic>)['peculiarities']
+        as List<dynamic>;
 
 @freezed
 class HotelPageModel with _$HotelPageModel {
