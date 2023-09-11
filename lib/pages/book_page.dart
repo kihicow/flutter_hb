@@ -417,107 +417,125 @@ class _CustomerInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _read(context).customerFormKey,
-      child: ModuleWidget(
-        children: [
-          const Text(
-            'Информация о покупателе',
-            style: AppStyle.titleTextStyle,
-          ),
-          const SizedBox(height: 16.0),
-          Stack(
-            children: [
-              TextFormField(
-                textInputAction: TextInputAction.next,
+    return ModuleWidget(
+      children: [
+        const Text(
+          'Информация о покупателе',
+          style: AppStyle.titleTextStyle,
+        ),
+        const SizedBox(height: 16.0),
+        Stack(
+          children: [
+            Form(
+              key: _read(context).phoneFormKey,
+              child: Focus(
+                onFocusChange: (value) {
+                  if (value) return;
+                  _read(context).phoneValid(_read(context).state.phone);
+                },
+                child: TextFormField(
+                  textInputAction: TextInputAction.next,
+                  style: AppStyle.textFieldTextStyle,
+                  keyboardType: TextInputType.phone,
+                  decoration: AppStyle.textFieldDecoration.copyWith(
+                    prefixText: '+7',
+                    prefixStyle: AppStyle.textFieldTextStyle,
+                    labelText: 'Номер телефона',
+                    hintText: '(***) ***-**-**',
+                    hintStyle: AppStyle.textFieldTextStyle
+                        .copyWith(color: AppStyle.subtitleColor),
+                    fillColor: _watch(context).state.phoneError
+                        ? AppStyle.errorColor
+                        : AppStyle.textFieldDecoration.fillColor,
+                  ),
+                  onChanged: (value) {
+                    _read(context)
+                        .add(BookPageEvent.customerPhoneUpdated(text: value));
+                  },
+                  inputFormatters: [
+                    PhoneInputFormatter(defaultCountryCode: 'ru'),
+                  ],
+                  autovalidateMode: _watch(context).state.phoneError
+                      ? AutovalidateMode.onUserInteraction
+                      : null,
+                  validator: (value) {
+                    if (_read(context).phoneValid(value)) {
+                      return null;
+                    }
+                    return '';
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 26.0, left: 16.5),
+              child: Text.rich(
+                TextSpan(
+                  style: AppStyle.textFieldTextStyle,
+                  children: [
+                    TextSpan(
+                      text: '+7${_watch(context).state.phoneInvisible}',
+                      style: AppStyle.textFieldTextStyle
+                          .copyWith(color: Colors.transparent),
+                    ),
+                    if (_watch(context).state.phone.isNotEmpty)
+                      TextSpan(
+                        text: _watch(context).state.phoneMask,
+                        style: AppStyle.textFieldTextStyle
+                            .copyWith(color: AppStyle.subtitleColor),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Form(
+            key: _read(context).emailFormKey,
+            child: Focus(
+              onFocusChange: (value) {
+                if (value) return;
+                _read(context).emailValid(_read(context).state.email);
+              },
+              child: TextFormField(
+                textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.emailAddress,
                 style: AppStyle.textFieldTextStyle,
                 decoration: AppStyle.textFieldDecoration.copyWith(
-                  prefixText: '+7',
-                  prefixStyle: AppStyle.textFieldTextStyle,
-                  labelText: 'Номер телефона',
-                  hintText: '(***) ***-**-**',
-                  hintStyle: AppStyle.textFieldTextStyle
-                      .copyWith(color: AppStyle.subtitleColor),
-                  fillColor: _watch(context).state.phoneError
+                  labelText: 'Почта',
+                  fillColor: _watch(context).state.emailError
                       ? AppStyle.errorColor
                       : AppStyle.textFieldDecoration.fillColor,
                 ),
-                onChanged: (value) {
-                  _read(context)
-                      .add(BookPageEvent.customerPhoneUpdated(text: value));
-                },
-                inputFormatters: [
-                  PhoneInputFormatter(defaultCountryCode: 'ru'),
-                ],
-                autovalidateMode: _watch(context).state.phoneError
+                autovalidateMode: _watch(context).state.emailError
                     ? AutovalidateMode.onUserInteraction
                     : null,
+                onChanged: (value) {
+                  _read(context)
+                      .add(BookPageEvent.customerEmailUpdated(text: value));
+                },
                 onEditingComplete: () {
-                  FocusScope.of(context).nextFocus();
+                  _read(context).emailFormKey.currentState!.validate();
+                  FocusScope.of(context).unfocus();
                 },
                 validator: (value) {
-                  if (_read(context).phoneValid(value)) {
+                  if (_read(context).emailValid(value)) {
                     return null;
                   }
                   return '';
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 22.0, left: 16.5),
-                child: Text.rich(
-                  TextSpan(
-                    style: AppStyle.textFieldTextStyle,
-                    children: [
-                      TextSpan(
-                        text: '+7${_watch(context).state.phoneInvisible}',
-                        style: AppStyle.textFieldTextStyle
-                            .copyWith(color: Colors.transparent),
-                      ),
-                      if (_watch(context).state.phone.isNotEmpty)
-                        TextSpan(
-                          text: _watch(context).state.phoneMask,
-                          style: AppStyle.textFieldTextStyle
-                              .copyWith(color: AppStyle.subtitleColor),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: TextFormField(
-              textInputAction: TextInputAction.done,
-              style: AppStyle.textFieldTextStyle,
-              decoration: AppStyle.textFieldDecoration.copyWith(
-                labelText: 'Почта',
-                fillColor: _watch(context).state.emailError
-                    ? AppStyle.errorColor
-                    : AppStyle.textFieldDecoration.fillColor,
-              ),
-              autovalidateMode: _watch(context).state.emailError
-                  ? AutovalidateMode.onUserInteraction
-                  : null,
-              onEditingComplete: () {
-                _read(context).customerFormKey.currentState!.validate();
-                FocusScope.of(context).unfocus();
-              },
-              validator: (value) {
-                if (_read(context).emailValid(value)) {
-                  return null;
-                }
-                return '';
-              },
             ),
           ),
-          const SizedBox(height: 8.0),
-          const Text(
-            'Эти данные никому не передаются. После оплаты мы вышлем чек на указанные вами номер и почту.',
-            style: AppStyle.smallTextStyle,
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8.0),
+        const Text(
+          'Эти данные никому не передаются. После оплаты мы вышлем чек на указанные вами номер и почту.',
+          style: AppStyle.smallTextStyle,
+        ),
+      ],
     );
   }
 }

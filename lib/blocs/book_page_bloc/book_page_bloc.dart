@@ -37,7 +37,8 @@ class BookPageBloc extends Bloc<BookPageEvent, BookPageState> {
     on<_TouristPassportDateUpdated>(_touristPassportDateUpdated);
   }
 
-  final GlobalKey<FormState> customerFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> phoneFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
 
   final Pattern _emailPattern =
       r"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
@@ -123,7 +124,8 @@ class BookPageBloc extends Bloc<BookPageEvent, BookPageState> {
 
     emit(state.copyWith(tourists: updatedTourists));
 
-    final bool isCustomerValid = customerFormKey.currentState!.validate();
+    final bool isPhoneValid = phoneFormKey.currentState!.validate();
+    final bool isEmailValid = emailFormKey.currentState!.validate();
 
     final List<bool> touristValidations = [];
     for (final element in state.tourists) {
@@ -133,7 +135,7 @@ class BookPageBloc extends Bloc<BookPageEvent, BookPageState> {
     final Iterable<bool> notValid =
         touristValidations.where((element) => element == false);
 
-    if (notValid.isNotEmpty || !isCustomerValid) return null;
+    if (notValid.isNotEmpty || !isEmailValid || !isPhoneValid) return null;
 
     Modular.to.pushNamed(OrderPaidPage.path);
   }
