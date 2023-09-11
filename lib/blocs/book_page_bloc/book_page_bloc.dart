@@ -42,6 +42,8 @@ class BookPageBloc extends Bloc<BookPageEvent, BookPageState> {
   final Pattern _emailPattern =
       r"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
 
+  final String _phoneMask = '(***) ***-**-**';
+
   bool emailValid(String? email) {
     final bool hasMatch =
         RegExp(_emailPattern.toString()).hasMatch(email ?? '');
@@ -241,7 +243,19 @@ class BookPageBloc extends Bloc<BookPageEvent, BookPageState> {
     _CustomerPhoneUpdated event,
     Emitter<BookPageState> emit,
   ) {
-    emit(state.copyWith(phone: event.text));
+    final String text = event.text;
+
+    final String? formatted = formatAsPhoneNumber(text);
+
+    final String phoneMask = _phoneMask.substring(text.length);
+
+    emit(
+      state.copyWith(
+        phone: text,
+        phoneInvisible: formatted!,
+        phoneMask: phoneMask,
+      ),
+    );
   }
 
   FutureOr<void> _customerEmailUpdated(

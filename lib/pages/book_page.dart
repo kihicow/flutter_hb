@@ -422,17 +422,26 @@ class _CustomerInfo extends StatelessWidget {
             style: AppStyle.titleTextStyle,
           ),
           const SizedBox(height: 16.0),
+          Stack(
+            children: [
           TextFormField(
             textInputAction: TextInputAction.next,
             style: AppStyle.textFieldTextStyle,
             decoration: AppStyle.textFieldDecoration.copyWith(
               prefixText: '+7',
+                  prefixStyle: AppStyle.textFieldTextStyle,
               labelText: 'Номер телефона',
               hintText: '(***) ***-**-**',
+                  hintStyle: AppStyle.textFieldTextStyle
+                      .copyWith(color: AppStyle.subtitleColor),
               fillColor: _watch(context).state.phoneError
                   ? AppStyle.errorColor
                   : AppStyle.textFieldDecoration.fillColor,
             ),
+                onChanged: (value) {
+                  _read(context)
+                      .add(BookPageEvent.customerPhoneUpdated(text: value));
+                },
             inputFormatters: [
               PhoneInputFormatter(defaultCountryCode: 'ru'),
             ],
@@ -448,6 +457,29 @@ class _CustomerInfo extends StatelessWidget {
               }
               return '';
             },
+          ),
+          Padding(
+                padding: const EdgeInsets.only(top: 22.0, left: 16.5),
+                child: Text.rich(
+                  TextSpan(
+                    style: AppStyle.textFieldTextStyle,
+                    children: [
+                      TextSpan(
+                        text: '+7${_watch(context).state.phoneInvisible}',
+                        style: AppStyle.textFieldTextStyle
+                            .copyWith(color: Colors.transparent),
+                      ),
+                      if (_watch(context).state.phone.isNotEmpty)
+                        TextSpan(
+                          text: _watch(context).state.phoneMask,
+                          style: AppStyle.textFieldTextStyle
+                              .copyWith(color: AppStyle.subtitleColor),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
