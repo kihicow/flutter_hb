@@ -23,12 +23,15 @@ dependencies:
   retrofit: ^4.0.1
 
 dev_dependencies:
+  bloc_test: ^9.1.4
   build_runner: ^2.4.6
   flutter_test:
     sdk: flutter
-  freezed: ^2.4.2
+  freezed: ^2.4.1
   json_serializable: ^6.7.1
   lint: ^2.1.2
+  mocktail: ^1.0.0
+  network_image_mock: ^2.1.1
   retrofit_generator: ^7.0.8
 
 flutter:

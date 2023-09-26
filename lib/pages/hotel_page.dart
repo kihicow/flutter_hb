@@ -23,7 +23,7 @@ class HotelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => Modular.get<HotelPageBloc>(),
-      child: const _View(),
+      child: const HotelView(),
     );
   }
 }
@@ -34,8 +34,8 @@ HotelPageBloc _read(BuildContext context) =>
 HotelPageBloc _watch(BuildContext context) =>
     WatchContext(context).watch<HotelPageBloc>();
 
-class _View extends StatelessWidget {
-  const _View();
+class HotelView extends StatelessWidget {
+  const HotelView();
 
   @override
   Widget build(BuildContext context) {
